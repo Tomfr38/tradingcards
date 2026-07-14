@@ -256,12 +256,14 @@ begin
     limit 1;
 
     -- atomically claim the slot; re-checks the cap so concurrent buyers can't
-    -- both win the same numbered edition
-    update card_templates
-    set editions_claimed = editions_claimed + 1
-    where id = v_template_id
-      and (print_run_cap is null or editions_claimed < print_run_cap)
-    returning editions_claimed into v_new_claimed;
+    -- both win the same numbered edition. Table alias "ct" is required here
+    -- (not just style) — this function's RETURNS TABLE declares an internal
+    -- print_run_cap variable, which a bare column reference would collide with.
+    update card_templates as ct
+    set editions_claimed = ct.editions_claimed + 1
+    where ct.id = v_template_id
+      and (ct.print_run_cap is null or ct.editions_claimed < ct.print_run_cap)
+    returning ct.editions_claimed into v_new_claimed;
 
     if not found then
       raise exception 'Pack pool exhausted — please retry your purchase';
