@@ -1,0 +1,117 @@
+.tc {
+  --w: 160px;
+  width: var(--w);
+  aspect-ratio: 5 / 7;
+  perspective: 800px;
+  transform-style: preserve-3d;
+  transition: transform 120ms ease-out;
+  display: inline-block;
+}
+.tc--horizontal { aspect-ratio: 7 / 5; }
+.tc--sm { --w: 110px; }
+.tc--md { --w: 170px; }
+.tc--lg { --w: 260px; }
+
+.tc-frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  padding: 8px;
+  box-sizing: border-box;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+}
+
+.tc-image-wrap {
+  position: relative;
+  width: 100%;
+  height: 78%;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #14141c;
+}
+.tc-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.tc-label {
+  margin-top: 6px;
+  font-size: 11px;
+  text-align: center;
+  color: #e8e8f0;
+  letter-spacing: 0.03em;
+}
+.tc-edition-badge {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background: rgba(0, 0, 0, 0.65);
+  color: #fff;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 6px;
+}
+
+/* Frame styles: each tier just swaps the border gradient */
+.frame--flat-slate .tc-frame { background: linear-gradient(160deg, #6a6a76, #9a9aa6); }
+.frame--gradient-teal .tc-frame { background: linear-gradient(160deg, #1fb6a7, #9be8de, #1fb6a7); }
+.frame--pattern-violet .tc-frame {
+  background: repeating-linear-gradient(135deg, #7a4fd1 0 8px, #b98ff0 8px 16px);
+}
+.frame--metallic-gold .tc-frame { background: linear-gradient(160deg, #b98a2e, #ffe9a8, #b98a2e); }
+.frame--foil-rainbow .tc-frame {
+  background: linear-gradient(160deg, #ff6ec7, #7afcff, #c8ff6e, #ffe36e, #ff6ec7);
+}
+.frame--obsidian-gold .tc-frame { background: linear-gradient(160deg, #111114, #d4af37, #111114); }
+
+/* Effect overlays */
+.tc-effect {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.effect--none { display: none; }
+
+.effect--sheen {
+  background: linear-gradient(100deg, transparent 40%, rgba(255, 255, 255, 0.35) 50%, transparent 60%);
+  mix-blend-mode: overlay;
+}
+
+.effect--glow-pulse {
+  box-shadow: inset 0 0 24px rgba(180, 120, 255, 0.6);
+  animation: tc-pulse 2.4s ease-in-out infinite;
+  animation-delay: var(--seed-delay);
+}
+
+.effect--holo-shimmer,
+.effect--holo-sweep,
+.effect--holo-prism {
+  background: linear-gradient(
+    115deg,
+    transparent 20%,
+    hsla(calc(var(--seed-hue) * 1deg), 90%, 70%, 0.55) 40%,
+    hsla(calc((var(--seed-hue) + 60) * 1deg), 90%, 70%, 0.55) 50%,
+    transparent 70%
+  );
+  background-size: 250% 250%;
+  mix-blend-mode: color-dodge;
+  animation: tc-shimmer 3.5s linear infinite;
+  animation-delay: var(--seed-delay);
+}
+
+.effect--holo-prism {
+  animation-duration: 2.2s;
+  filter: saturate(1.4);
+}
+
+@keyframes tc-shimmer {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 100% 100%; }
+}
+
+@keyframes tc-pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}

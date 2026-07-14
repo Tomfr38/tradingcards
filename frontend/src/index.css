@@ -1,0 +1,94 @@
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  background: #0f0f16;
+  color: #e8e8f0;
+}
+a { color: inherit; }
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 14px;
+  background: #4c4cff;
+  color: #fff;
+  font-size: 14px;
+}
+button:disabled { opacity: 0.6; cursor: not-allowed; }
+.link-button { background: none; color: #a0a0ff; padding: 4px; }
+input, select {
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid #33333f;
+  background: #1a1a24;
+  color: #e8e8f0;
+  font-size: 14px;
+}
+.muted { color: #9a9aa8; font-size: 13px; }
+.error { color: #ff8a8a; font-size: 13px; }
+.page-loading { padding: 40px; text-align: center; }
+
+.app-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 12px 20px;
+  background: #16161f;
+  border-bottom: 1px solid #26263280;
+}
+.app-header .brand { font-weight: 700; text-decoration: none; font-size: 16px; }
+.mode-toggle { display: flex; gap: 4px; background: #1a1a24; padding: 4px; border-radius: 10px; }
+.mode-toggle button { background: none; color: #9a9aa8; padding: 6px 14px; border-radius: 8px; }
+.mode-toggle button.active { background: #4c4cff; color: #fff; }
+.header-right { margin-left: auto; display: flex; align-items: center; gap: 14px; }
+.coin-balance { font-size: 14px; }
+
+.app-main { max-width: 1100px; margin: 0 auto; padding: 24px 20px 60px; }
+
+.auth-page { display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+.auth-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 320px;
+  padding: 28px;
+  background: #16161f;
+  border-radius: 14px;
+}
+.auth-card h1 { margin: 0 0 4px; font-size: 20px; }
+
+.section-title { font-size: 18px; margin: 0 0 12px; }
+.card-grid { display: flex; flex-wrap: wrap; gap: 18px; }
+
+.filters { display: flex; gap: 10px; margin-bottom: 16px; }
+
+.pack-tile {
+  background: #16161f;
+  border-radius: 12px;
+  padding: 16px;
+  width: 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.pack-tile h3 { margin: 0; font-size: 15px; }
+
+.upload-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 420px;
+}
+
+.reveal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+  z-index: 50;
+}
