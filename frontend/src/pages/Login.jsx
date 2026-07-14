@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { supabase } from '../supabaseClient'
 
 export default function Login() {
@@ -7,6 +8,7 @@ export default function Login() {
   const [mode, setMode] = useState('sign-in')
   const [message, setMessage] = useState('')
   const [busy, setBusy] = useState(false)
+  const navigate = useNavigate()
 
   async function handleSubmit(e) {
     e.preventDefault()
@@ -16,9 +18,15 @@ export default function Login() {
       mode === 'sign-in'
         ? supabase.auth.signInWithPassword({ email, password })
         : supabase.auth.signUp({ email, password })
-    const { error } = await action
+    const { data, error } = await action
     setBusy(false)
-    if (error) setMessage(error.message)
+    if (error) {
+      setMessage(error.message)
+    } else if (data.session) {
+      navigate('/collector', { replace: true })
+    } else {
+      setMessage('Check your email to confirm your account, then sign in.')
+    }
   }
 
   return (
